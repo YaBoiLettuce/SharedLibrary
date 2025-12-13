@@ -168,6 +168,8 @@ return null;
 return parameters;
 }
 
-
-
+    public void Use(object defaultResponse)
+    {
+        throw new NotImplementedException();
+    }
 }

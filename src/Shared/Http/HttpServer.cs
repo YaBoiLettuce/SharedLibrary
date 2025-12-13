@@ -1,5 +1,7 @@
 namespace Shared.Http;
-using Shared.Config;
+
+using global::Shared.Config;
+
 using System.Net;
 public abstract class HttpServer
 {

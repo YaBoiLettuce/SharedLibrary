@@ -503,7 +503,7 @@ public static class HttpUtils
     if (linkParts.Count > 0)
     {
       res.Headers["Link"] = string.Join(", ", linkParts);
-    }
-  }
+    }
+  }
 
 }

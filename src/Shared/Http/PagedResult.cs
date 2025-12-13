@@ -1,32 +1,18 @@
-using System.Collections;
-using System.Net;
+namespace Shared.Http; 
+ 
+ //Tipo de los elementos en la página.
+public class PagedResult<T> 
+{ 
+  //Número total de elementos disponible en la colección completa.
+  public int TotalCount { get; } 
 
-namespace Shared.Http;
-
-public class PagedResult<T>
-{
-    public int TotalCount { get; }
-    public List<T> Values { get; }
-    public PagedResult(int totalCount, List<T> values)
-    {
-        TotalCount = totalCount;
-        Values = values;
-    }
-
-    public static async Task SendPagedResultResponse<T>(HttpListenerRequest req, HttpListenerResponse res, Hashtable props, Result<PagedResult<T>> result, int page, int size)
-    {
-        if (result.IsError)
-        {
-            res.Headers["Cache-Control"] = "no-store";
-            await HttpUtils.SendResponse(req, res, props, result.StatusCode,
-            result.Error!.ToString()!);
-        }
-        else
-        {
-            var pagedResult = result.Payload!;
-            HttpUtils.AddPaginationHeaders(req, res, props, pagedResult, page, size);
-            await HttpUtils.SendResponse(req, res, props, result.StatusCode,
-            result.Payload!.ToString()!);
-        }
-    }
-}
+  //Lista de elementos en la página actual.
+  public List<T> Values { get; } 
+ 
+  //Creación de un PagedResult Object con el total de elementos y la lista de valores. 
+  public PagedResult(int totalCount, List<T> values) 
+  { 
+    TotalCount = totalCount; 
+    Values = values; 
+  } 
+} 
